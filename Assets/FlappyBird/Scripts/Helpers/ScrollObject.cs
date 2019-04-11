@@ -8,19 +8,26 @@ namespace FlappyBird
     public class ScrollObject : MonoBehaviour
     {
         private Rigidbody2D rigid;
+        GameManager gameManager;
+
+        private void Awake()
+        {
+            rigid = GetComponent<Rigidbody2D>();
+
+        }
 
         // Use this for initialization
         void Start()
         {
-            rigid = GetComponent<Rigidbody2D>();
-            rigid.velocity = new Vector2(GameManager.Instance.scrollSpeed, 0);
+            gameManager = GameManager.Instance;
+            rigid.velocity = new Vector2(gameManager.scrollSpeed, 0);
         }
 
         // Update is called once per frame
         void Update()
         {
             // Check if game is over
-            if (GameManager.Instance.gameOver)
+            if (gameManager.gameOver)
             {
                 // Cancel velocity to stop scrolling
                 rigid.velocity = Vector2.zero;
